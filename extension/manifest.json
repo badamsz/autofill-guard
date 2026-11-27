@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Autofill Guard",
+  "short_name": "Autofill Guard",
+  "version": "1.0.0",
+  "description": "Stops the browser from saving or suggesting form autocomplete and autofill data on sites you choose. Manageable by enterprise policy.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwqp2Ukj9cozu7gqUPPbQrqxSZPFA+ViHv2nO6am4ztegqtr/toGik1LxyZG79BadruLHa6vH61NTm+KDc2Bwu2nRPtW7B48e6ijwphC1m95YCvLVxpDAq4WRP1T9NKMR0RhXWwj8vXF6Sal+FsHksky+i8j8rfUY9Pavvn6XfSIbAXm6VQhyNaerJYIV55lEMyMIbL3Sz+asypqu+Evby/mTwfa0dp1B3MfXjNbQScDv/n/t5LrTrmBqWdnZ7GCEisDbJj/ywiI/XKqQ0Qqh9b7Iqu7jSU6s3ahskz4wXECmoVLpmdbQnJ7ShCxcDtGbZnk9Oeyopz8NtWbobxzBVQIDAQAB",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage", "scripting", "privacy", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "src/background.js", "type": "module" },
+  "storage": { "managed_schema": "schema.json" },
+  "action": {
+    "default_title": "Autofill Guard",
+    "default_popup": "src/popup.html",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png" }
+  },
+  "options_ui": { "page": "src/options.html", "open_in_tab": true },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" }
+}

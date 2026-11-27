@@ -1,0 +1,25 @@
+<!doctype html><html><body>
+<form id="f1" action="/done" method="get">
+  <input id="name" name="name">
+  <input id="email" name="email" type="email" autocomplete="email">
+  <input id="user" name="user" autocomplete="username">
+  <input id="pw" name="pw" type="password">
+  <input id="chk" type="checkbox">
+  <textarea id="ta"></textarea>
+  <select id="sel"><option>a</option></select>
+</form>
+<div id="host"></div>
+<script>
+  // dynamic field
+  setTimeout(() => { const i = document.createElement('input'); i.id = 'dyn'; i.name='dyn'; document.body.append(i); }, 200);
+  // open shadow root field
+  const h = document.getElementById('host');
+  const sr = h.attachShadow({mode:'open'});
+  setTimeout(() => { sr.innerHTML = '<input id="shadow">'; }, 300);
+  // closed shadow root
+  const c = document.createElement('div'); c.id='closed'; document.body.append(c);
+  const csr = c.attachShadow({mode:'closed'}); csr.innerHTML = '<input id="closedin">'; window.__csr = csr;
+  // hostile page resets attribute once
+  setTimeout(() => document.getElementById('name').setAttribute('autocomplete','on'), 500);
+</script>
+</body></html>

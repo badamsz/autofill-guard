@@ -1,0 +1,20 @@
+{
+  "3rdparty": {
+    "extensions": {
+      "pfojbgpchchehdkfmjeblbbilmnaljoj": {
+        "MandatorySites": [
+          "examplebank.com",
+          "=hr.example.com"
+        ],
+        "RecommendedSites": [
+          "example-vendor.com"
+        ],
+        "AllowUserSites": true,
+        "AllowDisablingRecommended": true,
+        "BlockAutocomplete": true,
+        "BlockAutofill": true,
+        "BlockPasswords": false
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Autofill Guard</title>
+  <link rel="stylesheet" href="ui.css">
+  <style>
+    body { width: 340px; padding: 14px; }
+    #host { font-weight: 600; word-break: break-all; }
+    header { margin-bottom: 12px; justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <header class="row">
+    <div class="brand"><img src="../icons/32.png" alt=""><h1>Autofill Guard</h1></div>
+    <span id="managedChip" class="chip mandatory" hidden>Managed</span>
+  </header>
+
+  <div class="stack">
+    <div class="card">
+      <div class="row">
+        <span id="dot" class="status-dot"></span>
+        <div class="grow">
+          <div id="host">&nbsp;</div>
+          <div id="statusText" class="muted small"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="addBox" class="stack" hidden>
+      <select id="scope" aria-label="What to block"></select>
+      <button id="addBtn" class="primary" style="width:100%">Block autofill on this site</button>
+    </div>
+
+    <div id="actionBox" hidden></div>
+
+    <div id="reloadBox" class="card small" hidden>
+      <div class="row"><span class="grow">Reload the page to fully apply the change.</span><button id="reloadBtn">Reload</button></div>
+    </div>
+
+    <div id="err" class="error"></div>
+
+    <div class="row small">
+      <span id="mode" class="muted grow"></span>
+      <button id="optionsBtn" class="link">Manage sites</button>
+    </div>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

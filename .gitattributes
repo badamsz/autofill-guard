@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# Windows policy artifacts are generated with CRLF line endings; keep them byte-for-byte.
+*.reg  -text
+*.admx -text
+*.adml -text
+*.png  binary

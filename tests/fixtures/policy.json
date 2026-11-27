@@ -1,0 +1,5 @@
+{ "3rdparty": { "extensions": { "pfojbgpchchehdkfmjeblbbilmnaljoj": {
+  "MandatorySites": ["mand.test", "bad entry!!"],
+  "RecommendedSites": ["rec.test"],
+  "BlockPasswords": true
+} } } }

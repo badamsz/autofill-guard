@@ -1,0 +1,18 @@
+Windows Registry Editor Version 5.00
+
+; Autofill Guard policy for Google Chrome (example values - edit before use)
+[-HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy]
+
+[HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy]
+"AllowUserSites"=dword:00000001
+"AllowDisablingRecommended"=dword:00000001
+"BlockAutocomplete"=dword:00000001
+"BlockAutofill"=dword:00000001
+"BlockPasswords"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy\MandatorySites]
+"1"="examplebank.com"
+"2"="=hr.example.com"
+
+[HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy\RecommendedSites]
+"1"="example-vendor.com"

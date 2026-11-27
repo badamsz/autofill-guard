@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Lint, unit tests, templates
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:unit
+      - name: Policy templates are up to date
+        run: npm run templates:check
+
+  e2e:
+    name: Browser tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Install test policy
+        # Playwright's Chromium is a Chrome for Testing build; the second path covers plain Chromium.
+        run: |
+          for dir in /etc/opt/chrome_for_testing/policies/managed /etc/chromium/policies/managed; do
+            sudo mkdir -p "$dir"
+            sudo cp tests/fixtures/policy.json "$dir/autofill-guard-test.json"
+          done
+      - run: npm run test:e2e
+
+  build:
+    name: Build
+    needs: [check]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # Unsigned here: the signing key is only exposed to the release workflow.
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: autofill-guard-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    name: Build and publish release
+    needs: [ci]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build signed artifacts
+        env:
+          CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
+          # Public URL the .crx will be served from (repository variable). Unset = GitHub release
+          # download URL, which browsers can only reach if the repository is public.
+          CRX_BASE_URL: ${{ vars.CRX_BASE_URL }}
+        run: npm run build -- --require-crx
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --verify-tag \
+            --title "Autofill Guard ${GITHUB_REF_NAME#v}" \
+            --generate-notes

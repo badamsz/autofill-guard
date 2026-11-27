@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <displayName>Autofill Guard</displayName>
+  <description>Policies for the Autofill Guard browser extension</description>
+  <resources>
+    <stringTable>
+      <string id="AutofillGuard">Autofill Guard extension</string>
+      <string id="SUPPORTED_AFG">Autofill Guard extension (pfojbgpchchehdkfmjeblbbilmnaljoj) on Chromium-based browsers</string>
+      <string id="AutofillGuard_chrome">Google Chrome</string>
+      <string id="AutofillGuard_edge">Microsoft Edge</string>
+      <string id="MandatorySites">Sites where autofill is always blocked</string>
+      <string id="MandatorySites_Explain">Sites/domains on which form autocomplete/autofill is always suppressed. Users cannot remove these. Format: example.com (domain and subdomains), =host.example.com (exact host), https://example.com (scheme-restricted).
+
+Entry formats:
+  example.com            example.com and all subdomains
+  =login.example.com     that exact host only
+  https://example.com    https only (http:// likewise)
+  10.0.0.5 / intranet    IPs and single-label names match exactly
+Ports and paths are ignored.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="RecommendedSites">Sites where autofill is blocked by default</string>
+      <string id="RecommendedSites_Explain">Sites/domains suppressed by default. Users can switch individual entries off in the extension options. Same format as MandatorySites.
+
+Entry formats:
+  example.com            example.com and all subdomains
+  =login.example.com     that exact host only
+  https://example.com    https only (http:// likewise)
+  10.0.0.5 / intranet    IPs and single-label names match exactly
+Ports and paths are ignored.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="AllowUserSites">Allow users to add their own sites</string>
+      <string id="AllowUserSites_Explain">If false, users cannot add their own sites and any previously added user sites are ignored. Default: true.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="AllowDisablingRecommended">Allow users to switch off recommended sites</string>
+      <string id="AllowDisablingRecommended_Explain">If false, RecommendedSites behave like MandatorySites. Default: true.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="BlockAutocomplete">Block single-field autocomplete history</string>
+      <string id="BlockAutocomplete_Explain">Suppress saving and suggesting previously-typed values (single-field autocomplete) on listed sites by forcing autocomplete=off on forms and fields. When set by policy, users cannot change it. Default: true.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="BlockAutofill">Block address / payment autofill</string>
+      <string id="BlockAutofill_Explain">Suppress Autofill profile data (addresses, contact info, payment cards) on listed sites using the browser's per-site autofill setting where available, otherwise by temporarily disabling address and card autofill while a listed site is the active tab. When set by policy, users cannot change it. Default: true.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="BlockPasswords">Block password manager</string>
+      <string id="BlockPasswords_Explain">Also suppress the built-in password manager (saving and filling) on listed sites. When set by policy, users cannot change it. Default: false.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+      <string id="ShowBadge">Show toolbar badge on blocked sites</string>
+      <string id="ShowBadge_Explain">Show an indicator on the toolbar icon when the current site is blocked. Default: true.
+
+Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="chrome_MandatorySites">
+        <listBox refId="MandatorySites_List">Sites:</listBox>
+      </presentation>
+      <presentation id="chrome_RecommendedSites">
+        <listBox refId="RecommendedSites_List">Sites:</listBox>
+      </presentation>
+      <presentation id="edge_MandatorySites">
+        <listBox refId="MandatorySites_List">Sites:</listBox>
+      </presentation>
+      <presentation id="edge_RecommendedSites">
+        <listBox refId="RecommendedSites_List">Sites:</listBox>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

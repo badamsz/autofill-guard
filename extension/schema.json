@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "MandatorySites": {
+      "title": "Sites where autofill is always blocked",
+      "description": "Sites/domains on which form autocomplete/autofill is always suppressed. Users cannot remove these. Format: example.com (domain and subdomains), =host.example.com (exact host), https://example.com (scheme-restricted).",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "RecommendedSites": {
+      "title": "Sites where autofill is blocked by default",
+      "description": "Sites/domains suppressed by default. Users can switch individual entries off in the extension options. Same format as MandatorySites.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "AllowUserSites": {
+      "title": "Allow users to add their own sites",
+      "description": "If false, users cannot add their own sites and any previously added user sites are ignored. Default: true.",
+      "type": "boolean"
+    },
+    "AllowDisablingRecommended": {
+      "title": "Allow users to switch off recommended sites",
+      "description": "If false, RecommendedSites behave like MandatorySites. Default: true.",
+      "type": "boolean"
+    },
+    "BlockAutocomplete": {
+      "title": "Block single-field autocomplete history",
+      "description": "Suppress saving and suggesting previously-typed values (single-field autocomplete) on listed sites by forcing autocomplete=off on forms and fields. When set by policy, users cannot change it. Default: true.",
+      "type": "boolean"
+    },
+    "BlockAutofill": {
+      "title": "Block address / payment autofill",
+      "description": "Suppress Autofill profile data (addresses, contact info, payment cards) on listed sites using the browser's per-site autofill setting where available, otherwise by temporarily disabling address and card autofill while a listed site is the active tab. When set by policy, users cannot change it. Default: true.",
+      "type": "boolean"
+    },
+    "BlockPasswords": {
+      "title": "Block password manager",
+      "description": "Also suppress the built-in password manager (saving and filling) on listed sites. When set by policy, users cannot change it. Default: false.",
+      "type": "boolean"
+    },
+    "ShowBadge": {
+      "title": "Show toolbar badge on blocked sites",
+      "description": "Show an indicator on the toolbar icon when the current site is blocked. Default: true.",
+      "type": "boolean"
+    }
+  }
+}

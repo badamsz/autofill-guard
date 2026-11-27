@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    ":pinDevDependencies",
+    ":maintainLockFilesWeekly",
+    ":timezone(America/New_York)"
+  ],
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "description": "GitHub Actions: one grouped PR; automerge non-major updates once CI passes",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "automerge": true
+    },
+    {
+      "description": "Playwright pins the Chromium version the e2e suite runs against, including the autocomplete=\"off\" canary test. Always review: a failure here can mean Chromium changed behaviour the extension relies on.",
+      "matchPackageNames": ["playwright"],
+      "labels": ["dependencies", "browser"],
+      "automerge": false
+    },
+    {
+      "description": "Build tooling: automerge non-major updates once CI passes",
+      "matchPackageNames": ["crx3", "yazl"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Node.js major bumps (.nvmrc) need a deliberate review",
+      "matchManagers": ["nvm"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "dependencyDashboardApproval": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["dependencies", "security"],
+    "schedule": ["at any time"]
+  }
+}

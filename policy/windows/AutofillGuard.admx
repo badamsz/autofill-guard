@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="autofillguard" namespace="AutofillGuard.Policies.pfojbgpchchehdkfmjeblbbilmnaljoj"/>
+  </policyNamespaces>
+  <resources minRequiredRevision="1.0"/>
+  <supportedOn>
+    <definitions>
+      <definition name="SUPPORTED_AFG" displayName="$(string.SUPPORTED_AFG)"/>
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="AutofillGuard" displayName="$(string.AutofillGuard)"/>
+    <category name="AutofillGuard_chrome" displayName="$(string.AutofillGuard_chrome)"><parentCategory ref="AutofillGuard"/></category>
+    <category name="AutofillGuard_edge" displayName="$(string.AutofillGuard_edge)"><parentCategory ref="AutofillGuard"/></category>
+  </categories>
+  <policies>
+    <policy name="chrome_MandatorySites" class="Machine" displayName="$(string.MandatorySites)" explainText="$(string.MandatorySites_Explain)" presentation="$(presentation.chrome_MandatorySites)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <elements>
+        <list id="MandatorySites_List" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy\MandatorySites" valuePrefix=""/>
+      </elements>
+    </policy>
+    <policy name="chrome_RecommendedSites" class="Machine" displayName="$(string.RecommendedSites)" explainText="$(string.RecommendedSites_Explain)" presentation="$(presentation.chrome_RecommendedSites)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <elements>
+        <list id="RecommendedSites_List" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy\RecommendedSites" valuePrefix=""/>
+      </elements>
+    </policy>
+    <policy name="chrome_AllowUserSites" class="Machine" displayName="$(string.AllowUserSites)" explainText="$(string.AllowUserSites_Explain)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="AllowUserSites">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="chrome_AllowDisablingRecommended" class="Machine" displayName="$(string.AllowDisablingRecommended)" explainText="$(string.AllowDisablingRecommended_Explain)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="AllowDisablingRecommended">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="chrome_BlockAutocomplete" class="Machine" displayName="$(string.BlockAutocomplete)" explainText="$(string.BlockAutocomplete_Explain)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="BlockAutocomplete">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="chrome_BlockAutofill" class="Machine" displayName="$(string.BlockAutofill)" explainText="$(string.BlockAutofill_Explain)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="BlockAutofill">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="chrome_BlockPasswords" class="Machine" displayName="$(string.BlockPasswords)" explainText="$(string.BlockPasswords_Explain)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="BlockPasswords">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="chrome_ShowBadge" class="Machine" displayName="$(string.ShowBadge)" explainText="$(string.ShowBadge_Explain)" key="Software\Policies\Google\Chrome\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="ShowBadge">
+      <parentCategory ref="AutofillGuard_chrome"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="edge_MandatorySites" class="Machine" displayName="$(string.MandatorySites)" explainText="$(string.MandatorySites_Explain)" presentation="$(presentation.edge_MandatorySites)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <elements>
+        <list id="MandatorySites_List" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy\MandatorySites" valuePrefix=""/>
+      </elements>
+    </policy>
+    <policy name="edge_RecommendedSites" class="Machine" displayName="$(string.RecommendedSites)" explainText="$(string.RecommendedSites_Explain)" presentation="$(presentation.edge_RecommendedSites)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <elements>
+        <list id="RecommendedSites_List" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy\RecommendedSites" valuePrefix=""/>
+      </elements>
+    </policy>
+    <policy name="edge_AllowUserSites" class="Machine" displayName="$(string.AllowUserSites)" explainText="$(string.AllowUserSites_Explain)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="AllowUserSites">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="edge_AllowDisablingRecommended" class="Machine" displayName="$(string.AllowDisablingRecommended)" explainText="$(string.AllowDisablingRecommended_Explain)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="AllowDisablingRecommended">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="edge_BlockAutocomplete" class="Machine" displayName="$(string.BlockAutocomplete)" explainText="$(string.BlockAutocomplete_Explain)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="BlockAutocomplete">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="edge_BlockAutofill" class="Machine" displayName="$(string.BlockAutofill)" explainText="$(string.BlockAutofill_Explain)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="BlockAutofill">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="edge_BlockPasswords" class="Machine" displayName="$(string.BlockPasswords)" explainText="$(string.BlockPasswords_Explain)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="BlockPasswords">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+    <policy name="edge_ShowBadge" class="Machine" displayName="$(string.ShowBadge)" explainText="$(string.ShowBadge_Explain)" key="Software\Policies\Microsoft\Edge\3rdparty\extensions\pfojbgpchchehdkfmjeblbbilmnaljoj\policy" valueName="ShowBadge">
+      <parentCategory ref="AutofillGuard_edge"/>
+      <supportedOn ref="SUPPORTED_AFG"/>
+      <enabledValue><decimal value="1"/></enabledValue>
+      <disabledValue><decimal value="0"/></disabledValue>
+    </policy>
+  </policies>
+</policyDefinitions>

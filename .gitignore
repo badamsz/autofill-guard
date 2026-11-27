@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.pem
+*.crx
+signing/
+test-results/
+.DS_Store
