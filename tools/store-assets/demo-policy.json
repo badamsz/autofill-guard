@@ -1,0 +1,6 @@
+{ "3rdparty": { "extensions": { "pfojbgpchchehdkfmjeblbbilmnaljoj": {
+  "MandatorySites": ["harborviewcu.example", "=hr.harborviewcu.example"],
+  "RecommendedSites": ["payroll-provider.example", "benefits.example"],
+  "AllowUserSites": true,
+  "BlockPasswords": false
+} } } }

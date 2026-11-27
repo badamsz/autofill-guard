@@ -1,7 +1,12 @@
-"""Render the toolbar icons (shield with a crossed-out text field)."""
+"""Render the icons (shield with a crossed-out text field).
+
+    python3 tools/make_icons.py extension/icons        # 16/32/48/128 toolbar + extension icons
+    python3 tools/make_icons.py --store store          # padded store icon + Edge logo
+"""
 import sys
 from PIL import Image, ImageDraw
-out = sys.argv[1]
+store = sys.argv[1] == "--store"
+out = sys.argv[2] if store else sys.argv[1]
 S = 512
 img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
 d = ImageDraw.Draw(img)
@@ -16,5 +21,16 @@ for i, x in enumerate((166, 216, 266)):
 # Slash
 d.line((140, 380, 372, 128), fill=(255, 255, 255, 255), width=46)
 d.line((140, 380, 372, 128), fill=(183, 28, 28, 255), width=26)
-for size in (16, 32, 48, 128):
-    img.resize((size, size), Image.LANCZOS).save(f"{out}/{size}.png")
+if not store:
+    for size in (16, 32, 48, 128):
+        img.resize((size, size), Image.LANCZOS).save(f"{out}/{size}.png")
+else:
+    def padded(size, art):
+        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        off = (size - art) // 2
+        canvas.paste(img.resize((art, art), Image.LANCZOS), (off, off))
+        return canvas
+    # Chrome Web Store: 128x128 with the artwork in the central 96x96 (16 px margin).
+    padded(128, 96).save(f"{out}/store-icon-128.png")
+    # Edge Add-ons logo: 1:1, 300x300 recommended.
+    padded(300, 260).save(f"{out}/edge-logo-300.png")
