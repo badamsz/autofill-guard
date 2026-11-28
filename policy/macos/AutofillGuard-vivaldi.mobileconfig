@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadType</key>
+			<string>com.vivaldi.Vivaldi.extensions.pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>PayloadIdentifier</key>
+			<string>autofillguard.vivaldi.pfojbgpchchehdkfmjeblbbilmnaljoj</string>
+			<key>PayloadUUID</key>
+			<string>E7C6BFB2-06C4-58CB-8F36-42602DB9CC58</string>
+			<key>PayloadDisplayName</key>
+			<string>Autofill Guard (Vivaldi)</string>
+			<key>MandatorySites</key>
+			<array>
+				<string>examplebank.com</string>
+				<string>=hr.example.com</string>
+			</array>
+			<key>RecommendedSites</key>
+			<array>
+				<string>example-vendor.com</string>
+			</array>
+			<key>AllowUserSites</key>
+			<true/>
+			<key>AllowDisablingRecommended</key>
+			<true/>
+			<key>BlockAutocomplete</key>
+			<true/>
+			<key>BlockAutofill</key>
+			<true/>
+			<key>BlockPasswords</key>
+			<false/>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>Autofill Guard policy (Vivaldi)</string>
+	<key>PayloadIdentifier</key>
+	<string>autofillguard.profile.vivaldi</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>694BF8C9-28DA-5EBC-9589-EDF6011CAFFB</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>PayloadScope</key>
+	<string>System</string>
+</dict>
+</plist>

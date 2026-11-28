@@ -8,6 +8,7 @@
       <string id="SUPPORTED_AFG">Autofill Guard extension (pfojbgpchchehdkfmjeblbbilmnaljoj) on Chromium-based browsers</string>
       <string id="AutofillGuard_chrome">Google Chrome</string>
       <string id="AutofillGuard_edge">Microsoft Edge</string>
+      <string id="AutofillGuard_vivaldi">Vivaldi (untested on Windows)</string>
       <string id="MandatorySites">Sites where autofill is always blocked</string>
       <string id="MandatorySites_Explain">Sites/domains on which form autocomplete/autofill is always suppressed. Users cannot remove these. Format: example.com (domain and subdomains), =host.example.com (exact host), https://example.com (scheme-restricted).
 
@@ -66,6 +67,12 @@ Extension ID: pfojbgpchchehdkfmjeblbbilmnaljoj</string>
         <listBox refId="MandatorySites_List">Sites:</listBox>
       </presentation>
       <presentation id="edge_RecommendedSites">
+        <listBox refId="RecommendedSites_List">Sites:</listBox>
+      </presentation>
+      <presentation id="vivaldi_MandatorySites">
+        <listBox refId="MandatorySites_List">Sites:</listBox>
+      </presentation>
+      <presentation id="vivaldi_RecommendedSites">
         <listBox refId="RecommendedSites_List">Sites:</listBox>
       </presentation>
     </presentationTable>

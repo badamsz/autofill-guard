@@ -174,4 +174,4 @@ The extension makes no network requests, collects nothing, and never reads field
 - Saving that happens before the first registration after a fresh install (about 3 seconds) is not guarded.
 - Pages that send form data via scripts without a form submission bypass Chromium's save logic entirely, so there is nothing to block.
 - The extension isn't enabled in Incognito/InPrivate unless the user allows it; no policy can force that.
-- Vivaldi: the extension's mechanisms work, but whether it applies managed-storage policy hasn't been verified (check `vivaldi://policy`).
+- Vivaldi: tested on macOS, where it reads policy from `com.vivaldi.Vivaldi.extensions.<id>` and exposes the native per-site autofill setting. Its Windows and Linux policy locations are untested (see `policy/README.md`).

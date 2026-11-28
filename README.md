@@ -40,9 +40,11 @@ Ports and paths are ignored.
 
 Templates in [`policy/`](policy) are generated from `extension/schema.json` (`npm run templates`):
 
-- **Windows:** `windows/AutofillGuard.admx` and `en-US/AutofillGuard.adml`, for Group Policy or Intune ADMX import, with Chrome and Edge sections. Example `.reg` files are included too.
-- **Linux:** `linux/*.json`, for `/etc/opt/chrome/policies/managed/` or `/etc/opt/edge/policies/managed/`.
-- **macOS:** `macos/*.mobileconfig`.
+- **Windows:** `windows/AutofillGuard.admx` and `en-US/AutofillGuard.adml`, for Group Policy or Intune ADMX import, with Chrome, Edge and Vivaldi sections. Example `.reg` files are included too.
+- **Linux:** `linux/*.json`, for each browser's managed policy directory.
+- **macOS:** `macos/*.mobileconfig`, one profile per browser.
+
+[`policy/README.md`](policy/README.md) lists every policy location and whether it's documented by the vendor, tested, or untested. Vivaldi is tested on macOS; its Windows and Linux locations are untested.
 
 Where you can, layer the native `AutofillSettings` policy (Chrome, and Edge 154+) and Edge's `PasswordManagerBlocklist` on top. Only the extension covers single-field autocomplete.
 
