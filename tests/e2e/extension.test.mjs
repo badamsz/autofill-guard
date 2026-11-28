@@ -53,6 +53,17 @@ test('policy, content script and site management', async (t) => {
     assert.deepEqual(await snapshot(await visit(ctx, server.url('other.test'))), UNGUARDED);
   });
 
+  await t.test('pages with SVG and MathML are fully guarded', async () => {
+    const p = await visit(ctx, server.url('svg.mand.test', '/svg'));
+    const r = await p.evaluate(() => ({
+      static: document.getElementById('static').getAttribute('autocomplete'),
+      dyn1: document.getElementById('dyn1').getAttribute('autocomplete'),
+      dyn2: document.getElementById('dyn2').getAttribute('autocomplete'),
+      closed: window.__csr.getElementById('closedin').getAttribute('autocomplete'),
+    }));
+    assert.deepEqual(r, { static: 'off', dyn1: 'off', dyn2: 'off', closed: 'off' });
+  });
+
   await t.test('user sites can be added and removed', async () => {
     assert.equal((await msg({ type: 'addUserSite', entry: '*bad*' })).ok, false);
     assert.equal((await msg({ type: 'addUserSite', entry: 'user.test' })).ok, true);

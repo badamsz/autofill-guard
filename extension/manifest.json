@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Autofill Guard",
   "short_name": "Autofill Guard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stop the browser from saving or suggesting autocomplete and autofill data on sites you choose. Manageable by enterprise policy.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwqp2Ukj9cozu7gqUPPbQrqxSZPFA+ViHv2nO6am4ztegqtr/toGik1LxyZG79BadruLHa6vH61NTm+KDc2Bwu2nRPtW7B48e6ijwphC1m95YCvLVxpDAq4WRP1T9NKMR0RhXWwj8vXF6Sal+FsHksky+i8j8rfUY9Pavvn6XfSIbAXm6VQhyNaerJYIV55lEMyMIbL3Sz+asypqu+Evby/mTwfa0dp1B3MfXjNbQScDv/n/t5LrTrmBqWdnZ7GCEisDbJj/ywiI/XKqQ0Qqh9b7Iqu7jSU6s3ahskz4wXECmoVLpmdbQnJ7ShCxcDtGbZnk9Oeyopz8NtWbobxzBVQIDAQAB",
   "minimum_chrome_version": "111",

@@ -58,10 +58,19 @@
   }
 
   const SELECTOR = 'form, input, textarea, select';
-  // Extensions can reach closed shadow roots via chrome.dom.
-  const shadowOf = chrome.dom?.openOrClosedShadowRoot
-    ? (el) => el.shadowRoot || chrome.dom.openOrClosedShadowRoot(el)
-    : (el) => el.shadowRoot;
+  // Extensions can reach closed shadow roots via chrome.dom. That API only accepts HTMLElements:
+  // SVG and MathML elements (icons are everywhere) make it throw, so skip them and never let a
+  // failure here abort the scan.
+  const closedRootOf = chrome.dom?.openOrClosedShadowRoot;
+  function shadowOf(el) {
+    if (el.shadowRoot) return el.shadowRoot;
+    if (!closedRootOf || !(el instanceof HTMLElement)) return null;
+    try {
+      return closedRootOf(el);
+    } catch {
+      return null;
+    }
+  }
 
   function processTree(root) {
     if (!root) return;
@@ -79,14 +88,22 @@
     }
   }
 
+  // Run one unit of work without letting an unexpected error stop the remaining ones.
+  function safely(fn, arg) {
+    try {
+      fn(arg);
+    } catch (e) {
+      console.debug('[AutofillGuard]', e);
+    }
+  }
+
   const observer = new MutationObserver((records) => {
     for (const rec of records) {
       if (rec.type === 'attributes') {
-        const el = rec.target;
-        if (rec.attributeName === 'type' || rec.attributeName === 'autocomplete') processEl(el);
+        if (rec.attributeName === 'type' || rec.attributeName === 'autocomplete') safely(processEl, rec.target);
         continue;
       }
-      for (const n of rec.addedNodes) if (n.nodeType === 1) processTree(n);
+      for (const n of rec.addedNodes) if (n.nodeType === 1) safely(processTree, n);
     }
   });
 
@@ -107,6 +124,8 @@
     inEvent = true;
     try {
       handleEventTargetInner(e);
+    } catch (err) {
+      console.debug('[AutofillGuard]', err);
     } finally {
       inEvent = false;
     }
@@ -130,11 +149,11 @@
     for (const type of ['pointerdown', 'mousedown', 'focusin', 'keydown', 'submit', 'formdata']) {
       document.addEventListener(type, handleEventTarget, { capture: true, passive: true });
     }
-    watch(document);
     // Catch shadow roots attached after their host was inserted.
-    const rescan = () => processTree(document);
+    const rescan = () => safely(processTree, document);
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rescan, { once: true });
     addEventListener('load', rescan, { once: true });
+    safely(watch, document);
   }
 
   chrome.storage.local.get('effective').then(

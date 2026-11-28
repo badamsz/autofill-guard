@@ -1,0 +1,23 @@
+<!doctype html><html><body>
+<!-- Regression: SVG/MathML elements must not break the scan (chrome.dom.openOrClosedShadowRoot
+     only accepts HTMLElements). Mimics an SPA that inserts icon-laden markup in one batch. -->
+<svg width="16" height="16"><circle cx="8" cy="8" r="6"/></svg>
+<math><mi>x</mi></math>
+<form id="f1"><input id="static" name="static"></form>
+<div id="app"></div>
+<script>
+  setTimeout(() => {
+    const app = document.getElementById('app');
+    // One mutation batch: an icon-bearing block first, then siblings with fields.
+    const a = document.createElement('div');
+    a.innerHTML = '<svg width="16" height="16"><path d="M0 0h16v16H0z"/></svg><input id="dyn1">';
+    const b = document.createElement('div');
+    b.innerHTML = '<input id="dyn2">';
+    const host = document.createElement('div');
+    const sr = host.attachShadow({ mode: 'closed' });
+    sr.innerHTML = '<svg width="8" height="8"></svg><input id="closedin">';
+    window.__csr = sr;
+    app.append(a, b, host);
+  }, 200);
+</script>
+</body></html>
