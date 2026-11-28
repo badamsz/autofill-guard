@@ -1,15 +1,33 @@
 name: Release
 
+# Runs when a v*.*.* tag is pushed, including the tag GitHub creates when you publish a release
+# from the web UI. Builds signed artifacts and attaches them to the release:
+#   - release already exists (e.g. written in the UI) -> upload assets, keep its title and notes
+#   - no release yet -> create one, using .github/release-notes/<tag>.md if present
+# Run it manually (Actions -> Release -> Run workflow) to (re)attach assets to an existing tag.
+
 on:
   push:
     tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build and attach assets to (for example v1.0.0)
+        required: true
+        type: string
 
 permissions:
   contents: read
 
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
   ci:
     uses: ./.github/workflows/ci.yml
+    with:
+      ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.ref }}
 
   release:
     name: Build and publish release
@@ -17,8 +35,20 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: write
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
     steps:
+      - name: Validate tag
+        run: |
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::'$TAG' is not a release tag like v1.2.3"
+            exit 1
+          fi
       - uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ env.TAG }}
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -26,16 +56,26 @@ jobs:
       - run: npm ci
       - name: Build signed artifacts
         env:
+          RELEASE_TAG: ${{ env.TAG }}
           CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
           # Public URL the .crx will be served from (repository variable). Unset = GitHub release
           # download URL, which browsers can only reach if the repository is public.
           CRX_BASE_URL: ${{ vars.CRX_BASE_URL }}
         run: npm run build -- --require-crx
-      - name: Create GitHub release
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Publish release assets
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/* \
-            --verify-tag \
-            --title "Autofill Guard ${GITHUB_REF_NAME#v}" \
-            --generate-notes
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; attaching assets and keeping its title and notes."
+            gh release upload "$TAG" dist/* --clobber
+          else
+            notes_file=".github/release-notes/$TAG.md"
+            if [[ -f "$notes_file" ]]; then notes=(--notes-file "$notes_file"); else notes=(--generate-notes); fi
+            gh release create "$TAG" dist/* --verify-tag --title "Autofill Guard ${TAG#v}" "${notes[@]}"
+          fi
+          {
+            echo "### Release $TAG"
+            echo
+            echo '```'
+            cat dist/SHA256SUMS
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

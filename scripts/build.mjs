@@ -90,10 +90,12 @@ async function main() {
   const version = manifest.version;
   if (!/^\d+(\.\d+){0,3}$/.test(version)) fail(`Invalid manifest version "${version}"`);
 
-  // On tag builds, the tag must match the manifest version.
+  // On release builds, the tag must match the manifest version. RELEASE_TAG is set by the release
+  // workflow (also for manual runs against an existing tag); tag pushes are covered by GITHUB_REF.
   const ref = process.env.GITHUB_REF || '';
-  if (ref.startsWith('refs/tags/v') && ref.slice('refs/tags/v'.length) !== version) {
-    fail(`Tag ${ref} does not match manifest version ${version}. Bump extension/manifest.json first.`);
+  const tag = process.env.RELEASE_TAG || (ref.startsWith('refs/tags/') ? ref.slice('refs/tags/'.length) : '');
+  if (tag && tag !== `v${version}`) {
+    fail(`Tag ${tag} does not match manifest version ${version}. Bump extension/manifest.json first.`);
   }
 
   await fs.rm(DIST, { recursive: true, force: true });
